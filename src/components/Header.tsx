@@ -12,7 +12,6 @@ const Header: React.FC<HeaderProps> = ({ toggleDarkMode, isDarkMode }) => {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <a href="#home" className="text-2xl font-bold text-gray-800 dark:text-accent-secondary">
-            PVS
           </a>
           
           <div className="hidden md:flex space-x-8">
