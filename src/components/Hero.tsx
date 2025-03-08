@@ -31,8 +31,7 @@ const Hero = () => {
         </h2>
         
         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-          A passionate Data Science and Web Development enthusiast with hands-on experience in 
-          Machine Learning, Full-Stack Development, and cloud technologies.
+        I am a Data Science student and a React Developer intern at SmartED Innovations. I'm also learning AWS and working on a Data Analytics project.
         </p>
         
         <div className="flex justify-center space-x-4 mb-8">
