@@ -18,7 +18,7 @@ const Contact = () => {
     setAlert({ show: true, message, type });
     setTimeout(() => {
       setAlert(prev => ({ ...prev, show: false }));
-    }, 5000); // Hide alert after 5 seconds
+    }, 5000); // Hide alert after five seconds
   };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
