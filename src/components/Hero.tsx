@@ -1,10 +1,26 @@
+import { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, FileText } from 'lucide-react';
 
 const Hero = () => {
+  const roles = ["Web Developer", "Data Scientist", "UI/UX Designer", "Data Analyst"];
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setCurrentRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
+        setIsVisible(true);
+      }, 500); // Wait for fade out before changing text
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   const handleDownload = () => {
-    // Create a link element
     const link = document.createElement('a');
-    link.href = '/resume.pdf'; // The PDF file should be in the public folder
+    link.href = '/resume.pdf';
     link.download = 'Sreedhar_Padigala_Resume.pdf';
     document.body.appendChild(link);
     link.click();
@@ -26,12 +42,21 @@ const Hero = () => {
           Padigala Venkata Sreedhar
         </h1>
         
-        <h2 className="text-2xl text-accent-primary dark:text-accent-secondary mb-6">
-          Computer Science & Engineering in Data Science
-        </h2>
+        <div className="h-8 mb-6">
+          <h2 className="text-2xl text-gray-700 dark:text-gray-300">
+            I am a{" "}
+            <span 
+              className={`text-accent-primary dark:text-accent-secondary transition-opacity duration-500 ${
+                isVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              {roles[currentRoleIndex]}
+            </span>
+          </h2>
+        </div>
         
         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-        I am a Data Science student and a React Developer intern at SmartED Innovations. I'm also learning AWS and working on a Data Analytics project.
+          I am a Data Science student and a React Developer intern at SmartED Innovations. I'm also learning AWS and working on a Data Analytics project.
         </p>
         
         <div className="flex justify-center space-x-4 mb-8">
