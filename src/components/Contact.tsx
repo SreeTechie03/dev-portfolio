@@ -1,15 +1,31 @@
 import { Phone, Mail, MapPin, Linkedin, Github } from "lucide-react";
 import { useState } from "react";
+import Alert from "./alert";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState<{
+    show: boolean;
+    message: string;
+    type: 'success' | 'error';
+  }>({
+    show: false,
+    message: '',
+    type: 'success'
+  });
 
-  // ✅ Correct TypeScript Typing for Form Submission
+  const showAlert = (message: string, type: 'success' | 'error') => {
+    setAlert({ show: true, message, type });
+    setTimeout(() => {
+      setAlert(prev => ({ ...prev, show: false }));
+    }, 5000); // Hide alert after 5 seconds
+  };
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
 
-    const form = event.currentTarget; // Explicitly type as HTMLFormElement
+    const form = event.currentTarget;
     const formData = new FormData(form);
     formData.append("access_key", "ea1a634a-e6be-4475-bb80-e255bf45985c");
 
@@ -27,16 +43,13 @@ const Contact = () => {
       }).then((res) => res.json());
 
       if (res.success) {
-        console.log("Success", res);
-        alert("Message sent successfully!");
-        form.reset(); // ✅ Correctly resets the form
+        showAlert('Message sent successfully!', 'success');
+        form.reset();
       } else {
-        console.log("Error", res);
-        alert("Message sending failed. Please try again.");
+        showAlert('Message sending failed. Please try again.', 'error');
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An unexpected error occurred.");
+      showAlert('An unexpected error occurred.', 'error');
     } finally {
       setLoading(false);
     }
@@ -44,6 +57,12 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 bg-white dark:bg-gray-900">
+      <Alert
+        message={alert.message}
+        type={alert.type}
+        isOpen={alert.show}
+        onClose={() => setAlert(prev => ({ ...prev, show: false }))}
+      />
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
           Hire Me...!
