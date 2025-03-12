@@ -15,7 +15,7 @@ const About = () => {
       grade: "CGPA: 8.43"
     },
     {
-      school: "C.S. Raju High School",
+      school: "C.S. Raju High School, Rayachoty.",
       degree: "Secondary School Certificate",
       year: "2019",
       grade: "CGPA: 9.30"
