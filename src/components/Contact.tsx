@@ -1,6 +1,6 @@
 import { Phone, Mail, MapPin, Linkedin, Github } from "lucide-react";
 import { useState } from "react";
-import Alert from "./alert";
+import Alert from "./Alert_Box";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
