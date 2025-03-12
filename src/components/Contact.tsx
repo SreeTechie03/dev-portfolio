@@ -1,32 +1,44 @@
-import React from "react";
 import { Phone, Mail, MapPin, Linkedin, Github } from "lucide-react";
+import { useState } from "react";
 
 const Contact = () => {
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
+  const [loading, setLoading] = useState(false);
 
+  // ✅ Correct TypeScript Typing for Form Submission
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+
+    const form = event.currentTarget; // Explicitly type as HTMLFormElement
+    const formData = new FormData(form);
     formData.append("access_key", "ea1a634a-e6be-4475-bb80-e255bf45985c");
 
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
 
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: json,
-    }).then((res) => res.json());
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      }).then((res) => res.json());
 
-    if (res.success) {
-      console.log("Success", res);
-      alert("Message sent successfully!");
-      event.target.reset(); // Clear the form after successful submission
-    } else {
-      console.log("Error", res);
-      alert("Message sending failed. Please try again.");
+      if (res.success) {
+        console.log("Success", res);
+        alert("Message sent successfully!");
+        form.reset(); // ✅ Correctly resets the form
+      } else {
+        console.log("Error", res);
+        alert("Message sending failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -145,8 +157,9 @@ const Contact = () => {
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
+                disabled={loading}
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
