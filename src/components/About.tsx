@@ -4,7 +4,7 @@ const About = () => {
   const education = [
     {
       school: "Sree Vidyanikethan Engineering College, Tirupati",
-      degree: "Bachelor of Technology, Computer Science and Engineering (Data Science)",
+      degree: "Bachelor of Technology, Computer Science and Engineering in Data Science",
       year: "2021 – 2025",
       grade: "CGPA: 8.07"
     },
