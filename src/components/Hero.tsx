@@ -32,7 +32,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 py-20 text-center">
         <div className="mb-8">
           <img
-            src="https://media.licdn.com/dms/image/v2/D4E03AQFkaw6G3z9aGw/profile-displayphoto-shrink_400_400/B4EZSJeI9OGwAg-/0/1737473168501?e=1746662400&v=beta&t=oSv0rFfHjQwCj0QkkfsPlevsf7PQroKsajTfeUKmZA8"
+            src="https://photos.app.goo.gl/d28uLVnw1PTMygn78"
             alt="Profile"
             className="w-32 h-32 rounded-full mx-auto shadow-lg ring-4 ring-accent-primary dark:ring-accent-secondary"
           />
